@@ -130,7 +130,7 @@ quant_categorias <- apply(base_tcc,
 
 
 
-### Consolidando as coordenadas-padrão obtidas por meio da matriz binária
+# Consolidando as coordenadas-padrão obtidas por meio da matriz binária
 df_ACM <- data.frame(ACM$c1, Variável = rep(names(quant_categorias),
                                             quant_categorias))
 
