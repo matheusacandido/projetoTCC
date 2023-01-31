@@ -73,7 +73,6 @@ base_tcc <- slice(base_tcc, -123)
 base_tcc <- slice(base_tcc, -93)
 
 
-
 ##Comeco do processo para conseguir extrair informacoes para o modelo
 #transformando os tipos das variáveis em fatores
 base_tcc <- as.data.frame(unclass(base_tcc), stringsAsFactors=TRUE)
@@ -100,6 +99,7 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
          show.row.prc = TRUE,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
+
 sjt.xtab(var.row = base_tcc$auto_ideologia,
          var.col = base_tcc$apoia_regime_militar,
          show.exp = TRUE,
@@ -107,6 +107,12 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
 
+sjt.xtab(var.row = base_tcc$interesse_politica,
+         var.col = base_tcc$genero,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
 
 
 #gerando a Anacor multipla
@@ -124,7 +130,7 @@ quant_categorias <- apply(base_tcc,
 
 
 
-# Consolidando as coordenadas-padrão obtidas por meio da matriz binária
+### Consolidando as coordenadas-padrão obtidas por meio da matriz binária
 df_ACM <- data.frame(ACM$c1, Variável = rep(names(quant_categorias),
                                             quant_categorias))
 
