@@ -78,6 +78,23 @@ base_tcc <- slice(base_tcc, -93)
 base_tcc <- as.data.frame(unclass(base_tcc), stringsAsFactors=TRUE)
 
 #Aqui faremos o teste do qui²
+#p-valor >0.05
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$faixa_idade,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#p-valor >0.05
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$genero,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#p-valor >0.05
 sjt.xtab(var.row = base_tcc$auto_ideologia,
          var.col = base_tcc$escolaridade,
          show.exp = TRUE,
@@ -85,14 +102,14 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
 
+#significante
 sjt.xtab(var.row = base_tcc$auto_ideologia,
          var.col = base_tcc$praticante_religiao,
          show.exp = TRUE,
          show.row.prc = TRUE,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
-
-
+#significante
 sjt.xtab(var.row = base_tcc$auto_ideologia,
          var.col = base_tcc$fonte_informacao,
          show.exp = TRUE,
@@ -100,6 +117,74 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
 
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$praticante_religiao,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#siginificante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$fonte_informacao,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$interesse_politica,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$significado_esquerda,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$significado_direita,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$apoia_sindicato,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$apoia_greve,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$governo_deve_reprimir_manifestacao,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#significante
 sjt.xtab(var.row = base_tcc$auto_ideologia,
          var.col = base_tcc$apoia_regime_militar,
          show.exp = TRUE,
@@ -107,12 +192,83 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
 
-sjt.xtab(var.row = base_tcc$interesse_politica,
-         var.col = base_tcc$genero,
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$respeito_leis,
          show.exp = TRUE,
          show.row.prc = TRUE,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
+
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$governo_proibir_partidos,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$meritocracia_capitalista,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$resolucao_problemas_sociais_socialismo,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$contra_aborto,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$apoia_desarmamento_civil,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$apoia_taxar_grandes_fortunas,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$governo_responsavel_saude_gratis,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
+#significante
+sjt.xtab(var.row = base_tcc$auto_ideologia,
+         var.col = base_tcc$familia_uniao_duas_pessoas,
+         show.exp = TRUE,
+         show.row.prc = TRUE,
+         show.col.prc = TRUE, 
+         encoding = "UTF-8")
+
 
 
 #gerando a Anacor multipla
