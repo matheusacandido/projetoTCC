@@ -56,7 +56,7 @@ colnames(base_tcc)[14] = "apoia_regime_militar"
 colnames(base_tcc)[15] = "respeito_leis"
 colnames(base_tcc)[16] = "governo_proibir_partidos"
 colnames(base_tcc)[17] = "meritocracia_capitalista"
-colnames(base_tcc)[18] = "resolucao_problemas_sociais_socialismo"
+colnames(base_tcc)[18] = "resolucao_prob_sociais_socialismo"
 colnames(base_tcc)[19] = "contra_aborto"
 colnames(base_tcc)[20] = "apoia_desarmamento_civil"
 colnames(base_tcc)[21] = "apoia_taxar_grandes_fortunas"
@@ -77,7 +77,8 @@ base_tcc <- slice(base_tcc, -93)
 #transformando os tipos das variáveis em fatores
 base_tcc <- as.data.frame(unclass(base_tcc), stringsAsFactors=TRUE)
 
-#Aqui faremos o teste do qui²
+#Aqui faremos o teste do qui-quadrado para verificar a significancia da associacao entre duas váriaveis
+
 #p-valor >0.05
 sjt.xtab(var.row = base_tcc$auto_ideologia,
          var.col = base_tcc$faixa_idade,
@@ -167,7 +168,7 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
 
-
+ 
 #significante
 sjt.xtab(var.row = base_tcc$auto_ideologia,
          var.col = base_tcc$apoia_greve,
@@ -268,6 +269,13 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
          show.row.prc = TRUE,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
+
+
+#outra forma de visualizar em tabela
+tab_xtab(base_tcc$auto_ideologia, base_tcc$familia_uniao_duas_pessoas,
+         CSS = list(css.table = "border: 2px solid;",
+                    css.tdata = "border: 1px solid;",
+                    css.horline = "border-bottom: double blue;"))
 
 
 
