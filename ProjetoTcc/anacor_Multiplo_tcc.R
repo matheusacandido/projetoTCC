@@ -63,7 +63,7 @@ colnames(base_tcc)[21] = "apoia_taxar_grandes_fortunas"
 colnames(base_tcc)[22] = "governo_responsavel_saude_gratis"
 colnames(base_tcc)[23] = "familia_uniao_duas_pessoas"
 
-#Alterando o conteudo para diminuir o tamanho da string
+#Alterando o conteudo para diminuir o tamanho da string 
 #base_tcc$fonte_informacao <- str_replace("Mídias/Redes sociais", "Mídias sociais (Facebook, Instagram, Twitter, grupos de Whatsapp, Telegram, etc)", base_tcc$fonte_informacao)
 
 #removendo a linha que a pessoa coloca o genero como "translado"
