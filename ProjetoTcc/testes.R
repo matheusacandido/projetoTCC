@@ -1,83 +1,26 @@
-pacotes <- c("plotly", 
-             "tidyverse", 
-             "ggrepel",
-             "knitr", 
-             "kableExtra", 
-             "sjPlot", 
-             "FactoMineR", 
-             "amap",
-             "readxl",
-             "gganimate",
-             "gifski",
-             "FactoMineR", 
-             "dplyr", 
-             "ade4",
-             "stringr")
+base_tcc <- base_tcc %>%mutate(base_tcc, 
+       genero = replace(genero, genero=="Feminino", "F"),
+       genero = replace(genero, genero=="Masculino", "M")
+       )
+
+base_tcc <- base_tcc %>%mutate(base_tcc, 
+                               fonte_informacao = replace(fonte_informacao, fonte_informacao=="Mídias sociais (Facebook, Instagram, Twitter, grupos de Whatsapp, Telegram, etc)", 
+                                                          "Midia_sociais")
+)
 
 
-if(sum(as.numeric(!pacotes %in% installed.packages())) != 0){
-  instalador <- pacotes[!pacotes %in% installed.packages()]
-  for(i in 1:length(instalador)) {
-    install.packages(instalador, dependencies = T)
-    break()}
-  sapply(pacotes, require, character = T) 
-} else {
-  sapply(pacotes, require, character = T) 
-}
+df2 <- base_tcc[complete.cases(base_tcc),]
 
-# Importando a base de dados
-base_tcc <- read.csv("Questionario.csv")
+dados2 <- base_tcc[!is.na(base_tcc$significado_direita),]
 
-#excluindo a data e o aceite do termo
-base_tcc <- base_tcc[,3:25]
+base_tcc <- base_tcc[,-18]
 
 
-#alterando nomes das colunas
-colnames(base_tcc)[2] = "faixa_idade" 
-colnames(base_tcc)[3] = "genero" 
-colnames(base_tcc)[4] = "escolaridade"
-colnames(base_tcc)[5] = "praticante_religiao"
-colnames(base_tcc)[6] = "fonte_informacao"
-colnames(base_tcc)[7] = "interesse_politica"
-colnames(base_tcc)[8] = "auto_ideologia"
+base_tcc<-dplyr::select(base_tcc, 
+                        auto_ideologia, 
+                        apoia_regime_militar
+)
 
-base_tcc <- base_tcc[,2:8]
-
-#Alterando o conteudo para diminuir o tamanho da string
-base_tcc$fonte_informacao <- str_replace("Mídias/Redes sociais", "Mídias sociais (Facebook, Instagram, Twitter, grupos de Whatsapp, Telegram, etc)", base_tcc$fonte_informacao)
-
-#removendo a linha que a pessoa coloca o genero como "translado"
-base_tcc <- slice(base_tcc, -123)
-
-#removendo a linha que a pessoa coloca o genero como "nao existe outro"
-base_tcc <- slice(base_tcc, -93)
-
-
-#transformando os tipos das variáveis em fatores
-base_tcc <- as.data.frame(unclass(base_tcc), stringsAsFactors=TRUE)
-
-#Aqui faremos o teste do qui²
-sjt.xtab(var.row = base_tcc$faixa_idade,
-         var.col = base_tcc$escolaridade,
-         show.exp = TRUE,
-         show.row.prc = TRUE,
-         show.col.prc = TRUE, 
-         encoding = "UTF-8")
-
-sjt.xtab(var.row = base_tcc$faixa_idade,
-         var.col = base_tcc$praticante_religiao,
-         show.exp = TRUE,
-         show.row.prc = TRUE,
-         show.col.prc = TRUE, 
-         encoding = "UTF-8")
-
-
-sjt.xtab(var.row = base_tcc$fonte_informacao,
-         var.col = base_tcc$escolaridade,
-         show.exp = TRUE,
-         show.row.prc = TRUE,
-         show.col.prc = TRUE, 
-         encoding = "UTF-8")
 
 
 #gerando a Anacor multipla

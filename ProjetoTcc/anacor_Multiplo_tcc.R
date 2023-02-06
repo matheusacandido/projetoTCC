@@ -1,22 +1,13 @@
 pacotes <- c("plotly", 
              "tidyverse", 
              "ggrepel",
-             "knitr", "kableExtra", 
+             "knitr", 
+             "kableExtra", 
              "sjPlot", 
              "FactoMineR", 
              "amap",
-             "readxl",
              "gganimate",
-             "amap", 
-             "ade4",
              "gifski",
-             "plotly", 
-             "tidyverse", 
-             "ggrepel",
-             "knitr", "kableExtra", 
-             "sjPlot", 
-             "FactoMineR", 
-             "amap", 
              "ade4",
              "readxl")
 
@@ -29,6 +20,7 @@ if(sum(as.numeric(!pacotes %in% installed.packages())) != 0){
 } else {
   sapply(pacotes, require, character = T) 
 }
+
 
 # Importando a base de dados
 base_tcc <- read.csv("Questionario.csv")
@@ -63,8 +55,15 @@ colnames(base_tcc)[21] = "apoia_taxar_grandes_fortunas"
 colnames(base_tcc)[22] = "governo_responsavel_saude_gratis"
 colnames(base_tcc)[23] = "familia_uniao_duas_pessoas"
 
-#Alterando o conteudo para diminuir o tamanho da string 
-#base_tcc$fonte_informacao <- str_replace("Mídias/Redes sociais", "Mídias sociais (Facebook, Instagram, Twitter, grupos de Whatsapp, Telegram, etc)", base_tcc$fonte_informacao)
+
+#####utilidades
+#base_tcc <- base_tcc %>%mutate(base_tcc, 
+#                               genero = replace(genero, genero=="Feminino", "F"),
+#                               genero = replace(genero, genero=="Masculino", "M"))
+#####################################################################
+
+#removendo a coluna com a variável cidade_residencia
+base_tcc <- base_tcc[,2:23]
 
 #removendo a linha que a pessoa coloca o genero como "translado"
 base_tcc <- slice(base_tcc, -123)
@@ -121,29 +120,13 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
 
 #significante
 sjt.xtab(var.row = base_tcc$auto_ideologia,
-         var.col = base_tcc$praticante_religiao,
-         show.exp = TRUE,
-         show.row.prc = TRUE,
-         show.col.prc = TRUE, 
-         encoding = "UTF-8")
-
-#siginificante
-sjt.xtab(var.row = base_tcc$auto_ideologia,
-         var.col = base_tcc$fonte_informacao,
-         show.exp = TRUE,
-         show.row.prc = TRUE,
-         show.col.prc = TRUE, 
-         encoding = "UTF-8")
-
-#significante
-sjt.xtab(var.row = base_tcc$auto_ideologia,
          var.col = base_tcc$interesse_politica,
          show.exp = TRUE,
          show.row.prc = TRUE,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
 
-#significante
+#siginificante
 sjt.xtab(var.row = base_tcc$auto_ideologia,
          var.col = base_tcc$significado_esquerda,
          show.exp = TRUE,
@@ -158,7 +141,6 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
          show.row.prc = TRUE,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
-
 
 #significante
 sjt.xtab(var.row = base_tcc$auto_ideologia,
@@ -222,7 +204,7 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
 
 #significante
 sjt.xtab(var.row = base_tcc$auto_ideologia,
-         var.col = base_tcc$resolucao_problemas_sociais_socialismo,
+         var.col = base_tcc$resolucao_prob_sociais_socialismo,
          show.exp = TRUE,
          show.row.prc = TRUE,
          show.col.prc = TRUE, 
