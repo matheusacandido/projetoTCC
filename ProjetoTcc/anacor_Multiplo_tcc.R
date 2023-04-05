@@ -9,7 +9,8 @@ pacotes <- c("plotly",
              "gganimate",
              "gifski",
              "ade4",
-             "readxl")
+             "readxl",
+             "dplyr")
 
 if(sum(as.numeric(!pacotes %in% installed.packages())) != 0){
   instalador <- pacotes[!pacotes %in% installed.packages()]
@@ -56,6 +57,31 @@ colnames(base_tcc)[22] = "governo_responsavel_saude_gratis"
 colnames(base_tcc)[23] = "familia_uniao_duas_pessoas"
 
 
+#alterando nomes das colunas
+#colnames(base_tcc)[1] = "cidade" 
+#colnames(base_tcc)[2] = "idade" 
+#colnames(base_tcc)[3] = "genero" 
+#colnames(base_tcc)[4] = "escol"
+#colnames(base_tcc)[5] = "religiao"
+#colnames(base_tcc)[6] = "fonte"
+#colnames(base_tcc)[7] = "interesse"
+#colnames(base_tcc)[8] = "ideologia"
+#colnames(base_tcc)[9] = "esquerda"
+#colnames(base_tcc)[10] = "direita"
+#colnames(base_tcc)[11] = "sindicato"
+#colnames(base_tcc)[12] = "greve"
+#colnames(base_tcc)[13] = "repressao"
+#colnames(base_tcc)[14] = "ditadura"
+#colnames(base_tcc)[15] = "leis"
+#colnames(base_tcc)[16] = "partidos"
+#colnames(base_tcc)[17] = "meritocracia"
+#colnames(base_tcc)[18] = "socialismo"
+#colnames(base_tcc)[19] = "aborto"
+#colnames(base_tcc)[20] = "desarmamento"
+#colnames(base_tcc)[21] = "taxa"
+#colnames(base_tcc)[22] = "saude"
+#colnames(base_tcc)[23] = "familia"
+
 #####utilidades
 #base_tcc <- base_tcc %>%mutate(base_tcc, 
 #                               genero = replace(genero, genero=="Feminino", "F"),
@@ -70,6 +96,9 @@ base_tcc <- slice(base_tcc, -123)
 
 #removendo a linha que a pessoa coloca o genero como "nao existe outro"
 base_tcc <- slice(base_tcc, -93)
+
+#removendo a linha que a pessoa coloca em branco o "significado de direita"
+base_tcc <- slice(base_tcc, -9)
 
 
 ##Comeco do processo para conseguir extrair informacoes para o modelo
@@ -109,6 +138,7 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
          show.row.prc = TRUE,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
+
 #significante
 sjt.xtab(var.row = base_tcc$auto_ideologia,
          var.col = base_tcc$fonte_informacao,
@@ -116,7 +146,6 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
          show.row.prc = TRUE,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
-
 
 #significante
 sjt.xtab(var.row = base_tcc$auto_ideologia,
@@ -150,7 +179,6 @@ sjt.xtab(var.row = base_tcc$auto_ideologia,
          show.col.prc = TRUE, 
          encoding = "UTF-8")
 
- 
 #significante
 sjt.xtab(var.row = base_tcc$auto_ideologia,
          var.col = base_tcc$apoia_greve,
@@ -258,6 +286,10 @@ tab_xtab(base_tcc$auto_ideologia, base_tcc$familia_uniao_duas_pessoas,
          CSS = list(css.table = "border: 2px solid;",
                     css.tdata = "border: 1px solid;",
                     css.horline = "border-bottom: double blue;"))
+
+
+#Removendo as colunas em que o teste qui² mostrou baixa significancia estatistica entre as duas variaveis
+base_tcc <- base_tcc[,4:22]
 
 
 
