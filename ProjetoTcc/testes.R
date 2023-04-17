@@ -54,3 +54,12 @@ df_ACM %>%
   labs(x = paste("Dimensão 1:", paste0(round(perc_variancia[1], 2), "%")),
        y = paste("Dimensão 2:", paste0(round(perc_variancia[2], 2), "%"))) +
   theme_bw()
+
+
+#pacote para usar o sql no R
+#install.packages("sqldf")
+#
+library(sqldf)
+
+base_teste <- sqldf("Select * from baseSeg5 where familia='Sim'")
+summary(base_teste)
