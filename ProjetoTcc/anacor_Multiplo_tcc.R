@@ -280,6 +280,7 @@ df_ACM <- data.frame(ACM$c1, Variável = rep(names(quant_categorias),
                                             quant_categorias))
 
 # Plotando o mapa perceptual
+ggplotly(
 df_ACM %>%
   rownames_to_column() %>%
   rename(Categoria = 1) %>%
@@ -291,6 +292,7 @@ df_ACM %>%
   labs(x = paste("Dimensão 1:", paste0(round(perc_variancia[1], 2), "%")),
        y = paste("Dimensão 2:", paste0(round(perc_variancia[2], 2), "%"))) +
   theme_bw()
+)
 
 
 ######################################################################################
@@ -421,8 +423,8 @@ df_ACM %>%
 ######################################################################################
 
 
-baseSeg3 <- select(base_tcc, ideologia, reg_mil, meritocracia, socialismo)
-#baseSeg3 <- select(base_tcc, ideologia, reg_mil, meritocracia, socialismo)
+baseSeg3 <- select(base_tcc, ideologia, reg_mil, capitalismo, socialismo)
+#baseSeg3 <- select(base_tcc, ideologia, reg_mil, capitalismo, socialismo)
 
 #baseSeg3 <- NULL
 
@@ -455,14 +457,13 @@ df_ACM %>%
   rename(Categoria = 1) %>%
   ggplot(aes(x = CS1, y = CS2, label = Categoria, color = Variável)) +
   geom_point() +
-  ggtitle("Segmento 3") +
+  ggtitle("Grupo 3") +
   geom_label_repel() +
   geom_vline(aes(xintercept = 0), linetype = "longdash", color = "grey48") +
   geom_hline(aes(yintercept = 0), linetype = "longdash", color = "grey48") +
   labs(x = paste("Dimensão 1:", paste0(round(perc_variancia[1], 2), "%")),
        y = paste("Dimensão 2:", paste0(round(perc_variancia[2], 2), "%"))) +
   theme_bw()
-
 
 
 ######################################################################################
@@ -507,7 +508,7 @@ df_ACM %>%
   rename(Categoria = 1) %>%
   ggplot(aes(x = CS1, y = CS2, label = Categoria, color = Variável)) +
   geom_point() +
-  ggtitle("Segmento 4") +
+  ggtitle("Grupo 4") +
   geom_label_repel() +
   geom_vline(aes(xintercept = 0), linetype = "longdash", color = "grey48") +
   geom_hline(aes(yintercept = 0), linetype = "longdash", color = "grey48") +
@@ -557,7 +558,7 @@ df_ACM %>%
   rename(Categoria = 1) %>%
   ggplot(aes(x = CS1, y = CS2, label = Categoria, color = Variável)) +
   geom_point() +
-  ggtitle("Segmento 5") +
+  ggtitle("Grupo 5") +
   geom_label_repel() +
   geom_vline(aes(xintercept = 0), linetype = "longdash", color = "grey48") +
   geom_hline(aes(yintercept = 0), linetype = "longdash", color = "grey48") +
