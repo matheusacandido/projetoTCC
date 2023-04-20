@@ -308,7 +308,7 @@ df_ACM %>%
 
 ######################################################################################
 
-baseSeg1 <- select(base_tcc, ideologia, religiao, interesse, esquerda, direita)
+baseSeg1 <- select(base_tcc, ideologia, religiao, fonte, interesse, esquerda, direita)
 #baseSeg1 <- select(base_tcc, ideologia, religiao, interesse, esquerda, direita)
 
 #baseSeg1 <- NULL
@@ -572,6 +572,7 @@ df_ACM %>%
 
 baseRELIGIAO  <- select(base_tcc, ideologia, religiao)
 baseINTERESSE <- select(base_tcc, ideologia, interesse)
+baseFONTE     <- select(base_tcc, ideologia, fonte)
 baseESQUERDA  <- select(base_tcc, ideologia, esquerda)
 baseDIREITA   <- select(base_tcc, ideologia, direita)
 baseSINDICATO <- select(base_tcc, ideologia, sindicato)
@@ -664,6 +665,46 @@ df_ACM %>%
   labs(x = paste("Dimensão 1:", paste0(round(perc_variancia[1], 2), "%")),
        y = paste("Dimensão 2:", paste0(round(perc_variancia[2], 2), "%"))) +
   theme_bw()
+
+######preparacao para plotagem baseFONTE
+######
+
+#Transformando os tipos das variaveis em fatores
+baseFONTE <- as.data.frame(unclass(baseFONTE), stringsAsFactors=TRUE)
+
+#gerando a Anacor multipla
+ACMsegFon <- dudi.acm(baseFONTE, scannf = FALSE)
+
+# Analisando as variâncias de cada dimensão
+perc_variancia <- (ACMsegFon$eig / sum(ACMsegFon$eig)) * 100
+paste0(round(perc_variancia,2),"%")
+
+# Quantidade de categorias por variável
+quant_categorias <- apply(baseFONTE,
+                          MARGIN =  2,
+                          FUN = function(x) nlevels(as.factor(x)))
+
+# Consolidando as coordenadas-padrão obtidas por meio da matriz binária
+df_ACM <- data.frame(ACMsegFon$c1, Variável = rep(names(quant_categorias),
+                                                  quant_categorias))
+
+# Plotando o mapa perceptual
+
+df_ACM %>%
+  rownames_to_column() %>%
+  rename(Categoria = 1) %>%
+  ggplot(aes(x = CS1, y = CS2, label = Categoria, color = Variável)) +
+  geom_point() +
+  ggtitle("Ideologia x Fonte") +
+  geom_label_repel() +
+  geom_vline(aes(xintercept = 0), linetype = "longdash", color = "grey48") +
+  geom_hline(aes(yintercept = 0), linetype = "longdash", color = "grey48") +
+  labs(x = paste("Dimensão 1:", paste0(round(perc_variancia[1], 2), "%")),
+       y = paste("Dimensão 2:", paste0(round(perc_variancia[2], 2), "%"))) +
+  theme_bw()
+
+################################################################
+
 
 ######preparacao para plotagem baseESQUERDA
 ######
@@ -980,7 +1021,7 @@ perc_variancia <- (ACMsegReg$eig / sum(ACMsegReg$eig)) * 100
 paste0(round(perc_variancia,2),"%")
 
 # Quantidade de categorias por variável
-quant_categorias <- apply(baseDESARMAMENTO,
+quant_categorias <- apply(baseREGMIL,
                           MARGIN =  2,
                           FUN = function(x) nlevels(as.factor(x)))
 
